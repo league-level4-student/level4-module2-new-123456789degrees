@@ -1,6 +1,14 @@
 package _06_Console_Store;
+import java.util.Scanner;
 
-public class ConsoleStore {
+import _02_Generics_Store.Candy;
+import _02_Generics_Store.Cart;
+import _02_Generics_Store.Cereal;
+import _02_Generics_Store.Clothing;
+import _02_Generics_Store.Food;
+import _02_Generics_Store.NonFood;
+import _02_Generics_Store.Toy;
+public class ConsoleStore{
 
     /*
      * Write a program that simulates shopping in a store using the Scanner and
@@ -36,8 +44,52 @@ public class ConsoleStore {
      * items and their total.
      */
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args){
+    	System.out.println("Welcome to the Console Store! You have 20 dollars. We sell candy, cereal, clothing, and toys.");
+    	boolean checkedOut = false;
+    	Cart<Food, NonFood> cart = new Cart<Food, NonFood>();
+    	Scanner scanner = new Scanner(System.in);
+    	while (!checkedOut) {
+    		System.out.println("Do you want to add an item to your cart? (y/n)");
+    		String s = scanner.nextLine();
+    		if (s.equals("y")) {
+    			System.out.println("Which item do you want to buy?");
+        		String item = scanner.nextLine();
+        		item = item.toLowerCase();
+        		if (item.equals("candy")) {
+        			cart.add(new Candy());
+        		}
+        		else if (item.equals("clothing")) {
+        			cart.add(new Clothing());
+        		}
+        		else if (item.equals("cereal")) {
+        			cart.add(new Cereal());
+        		}
+        		else if (item.equals("toys")) {
+        			cart.add(new Toy());
+        		}
+    		}
+    		else {
+    			System.out.println("Do you want to remove an item then? (y/n)");
+    			String s2 = scanner.nextLine();
+    			if (s2.equals("y")) {
+    				System.out.println("Which item do you want to remove? Here are the items in the cart:");
+    				
+    				String itemRemoved = scanner.nextLine();
+    				itemRemoved = itemRemoved.toLowerCase();
+    				if (itemRemoved.equals("candy")) {
+    					
+    				}
+    			}
+    		}
+    		System.out.println("Do you want to check out now? (y/n)");
+    		String temp = scanner.nextLine();
+    		checkedOut = temp.equals("y") ? true : false;
+    	}
+    	double total = cart.getTotal();
+    	if (total > 20.0) {
+    		System.out.println("You don't have enough money to pay for this. Do you want to take ");
+    	}
     }
 
 }

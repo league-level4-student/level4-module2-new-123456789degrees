@@ -67,8 +67,20 @@ public class Cart<F extends Food, T extends NonFood> {
     }
     
     public void printCart() {
-    	for (int i = 1; i <= cartF.size(); i++) {
-    		System.out.println("Item " + i + ": " + cartF.get(i-1).getType());
+    	int i2 = 1;
+    	for (int i = 0; i < cartF.size(); i++) {
+    		System.out.println("Item " + i2++ + ": " + cartF.get(i).getType());
+    	}
+    	for (int i = 0; i < cartN.size(); i++) {
+    		System.out.println("Item " + i2++ + ": " + cartN.get(i).getType());
+    	}
+    }
+    public void remove(int index) {
+    	if (index-1 < cartF.size()) {
+    		cartF.remove(index-1);
+    	}
+    	else {
+    		cartN.remove(index-1);
     	}
     }
 }

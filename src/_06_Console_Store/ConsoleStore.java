@@ -45,7 +45,7 @@ public class ConsoleStore{
      */
 
     public static void main(String[] args){
-    	System.out.println("Welcome to the Console Store! You have 20 dollars. We sell candy, cereal, clothing, and toys.");
+    	System.out.println("Welcome to the Console Store! You have 50 dollars. We sell candy, cereal, clothing, and toys.");
     	boolean checkedOut = false;
     	Cart<Food, NonFood> cart = new Cart<Food, NonFood>();
     	Scanner scanner = new Scanner(System.in);
@@ -65,7 +65,7 @@ public class ConsoleStore{
         		else if (item.equals("cereal")) {
         			cart.add(new Cereal());
         		}
-        		else if (item.equals("toys")) {
+        		else if (item.equals("toy")) {
         			cart.add(new Toy());
         		}
     		}
@@ -73,23 +73,38 @@ public class ConsoleStore{
     			System.out.println("Do you want to remove an item then? (y/n)");
     			String s2 = scanner.nextLine();
     			if (s2.equals("y")) {
-    				System.out.println("Which item do you want to remove? Here are the items in the cart:");
-    				
-    				String itemRemoved = scanner.nextLine();
-    				itemRemoved = itemRemoved.toLowerCase();
-    				if (itemRemoved.equals("candy")) {
-    					
-    				}
+    				System.out.println("Which item do you want to remove? Here are the items in the cart:\n");
+    				cart.printCart();
+    				int itemRemoved = scanner.nextInt();
+    				scanner.nextLine();
+    				cart.remove(itemRemoved);
     			}
+    		}
+    		System.out.println("Do you want to view your cart? (y/n)");
+    		String s2 = scanner.nextLine();
+    		if (s2.equals("y")) {
+    			System.out.println("Here is your cart:");
+    			cart.printCart();
     		}
     		System.out.println("Do you want to check out now? (y/n)");
     		String temp = scanner.nextLine();
     		checkedOut = temp.equals("y") ? true : false;
     	}
-    	double total = cart.getTotal();
-    	if (total > 20.0) {
-    		System.out.println("You don't have enough money to pay for this. Do you want to take ");
-    	}
+    	boolean good = false;
+    	do {
+    		double total = cart.getTotal();
+        	if (total > 40.0) {
+        		good = false;
+        		System.out.println("You don't have enough money to pay for this. Which item do you want to remove?");
+        		cart.printCart();
+        		int itemRemoved = scanner.nextInt();
+    			scanner.nextLine();
+    			cart.remove(itemRemoved);
+        	}
+        	else {
+        		System.out.println("You spent a total of $" + total + ". Have a great day!");
+        		good = true;
+        	}	
+    	}while(!good);
     }
-
 }
